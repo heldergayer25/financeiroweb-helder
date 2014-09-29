@@ -5,8 +5,20 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"> 
 
-<h:head></h:head> 
-<h:body>	
-	<p:spinner />
+<h:head>
+	<link rel="stylesheet" type="text/css"  href="/estilo.css"/>
+</h:head> 
+<h:body>			
+	<div class="login">Oi</div>		
+	<h:form>
+		<h:panelGrid columns="2" cellpadding="5" styleClass="login">
+			<h:outputText value="Login: " />
+       		<p:inputText id="txLogin" size="30" />
+			<h:outputText value="Senha: " />
+       		<p:password id="txSenha" size="30" />
+		</h:panelGrid>
+		
+		<p:commandButton value="Save" />
+	</h:form>		
 </h:body> 
 </html>

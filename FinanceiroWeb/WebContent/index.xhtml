@@ -6,19 +6,26 @@
       xmlns:p="http://primefaces.org/ui"> 
 
 <h:head>
-	<link rel="stylesheet" type="text/css"  href="/estilo.css"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="/estilo.css"/>
+	<title>Login</title>	
+	<style type="text/css">
+	    body {background-color: #eeeeee; font-size: 14px; font-family: 'helvetica'; }
+	    .login { border: 2px solid #D9D9D9; width: 400px; height: 200px; margin: 0 auto; margin-top: 200px;}	
+	    h2 { font-size: 40px; text-align: center; color: #B8B8B8; margin-top: 100px; }    
+    </style> 	
 </h:head> 
-<h:body>			
-	<div class="login">Oi</div>		
-	<h:form>
-		<h:panelGrid columns="2" cellpadding="5" styleClass="login">
+<h:body>
+	<h2>Financeiro Web</h2>	
+	<h:form styleClass="login" >		
+		<h:panelGrid columns="2" cellpadding="5" style="margin: 0 auto; margin-top: 40px;">
 			<h:outputText value="Login: " />
        		<p:inputText id="txLogin" size="30" />
 			<h:outputText value="Senha: " />
        		<p:password id="txSenha" size="30" />
 		</h:panelGrid>
 		
-		<p:commandButton value="Save" />
+		<p:commandButton value="Entrar" style="float: right; margin-top: 20px; margin-right: 50px;"/>
 	</h:form>		
 </h:body> 
 </html>

@@ -5,33 +5,38 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"> 
 
-<h:head></h:head> 
-<body> 
-	<h:form id="form">
-      <table width="100%">
-        <tr>
-          <td colspan="2" align="center">
-            <ui:insert name="cabecalho">
-              <h1>Template Web</h1>
-            </ui:insert>
-          </td>
-        </tr>
-        <tr>
-          <td width="200px" valign="top">
-            <ui:insert name="menu">
-              <h1>Menu</h1>
-              <h:panelGrid columns="1">
-                <h:commandLink value="Cadastro de Usuário" action="usuario.xhtml"/>
-              </h:panelGrid>
-            </ui:insert>
-          </td>
-          <td>
-            <ui:insert name="conteudo">
-              Conteúdo
-            </ui:insert>
-          </td>
-        </tr>
-      </table>
-    </h:form>
-</body> 
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Bem vindo ao Financeiro Web!</title>
+    <style type="text/css">
+	    body {background-color: #eeeeee; font-size: 12px}
+    </style> 
+    </h:head>
+    <h:body>
+        <div align="center">
+            <p:layout style="min-width:1020px;max-width:1020px;min-height:600px">  
+                <p:layoutUnit position="north" size="100">  
+                    <!-- <h:graphicImage url="/tema/imagens/topo.jpg" /> -->
+                </p:layoutUnit>  
+ 
+                <p:layoutUnit position="west" size="220">  
+                    <ui:insert name="menu">
+                        <h:form>
+                            <p:menu style="width: 200px">
+                                <p:submenu label="Menu">
+                                    <p:menuitem value="Login" icon="ui-icon-key" />
+                                    <p:menuitem value="Fazer meu cadastro" icon="ui-icon-contact" />         
+                                </p:submenu>
+                            </p:menu>
+                        </h:form>
+                    </ui:insert>
+                </p:layoutUnit>  
+                <p:layoutUnit position="center">  
+                    <ui:insert name="centro">
+                        O que estiver aqui será substituido!
+                    </ui:insert>
+                </p:layoutUnit>  
+            </p:layout>  
+        </div>
+    </h:body>
 </html>

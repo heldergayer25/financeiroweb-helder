@@ -11,21 +11,21 @@
 	<title>Login</title>	
 	<style type="text/css">
 	    body {background-color: #eeeeee; font-size: 14px; font-family: 'helvetica'; }
-	    .login { border: 2px solid #D9D9D9; width: 400px; height: 200px; margin: 0 auto; margin-top: 200px;}	
+	    .login { border: 2px solid #D9D9D9; width: 400px; height: 250px; margin: 0 auto; margin-top: 200px;}	
 	    h2 { font-size: 40px; text-align: center; color: #B8B8B8; margin-top: 100px; }    
     </style> 	
 </h:head> 
 <h:body>
 	<h2>Financeiro Web</h2>	
-	<h:form styleClass="login" >		
+	<h:form styleClass="login" >
+		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />		
 		<h:panelGrid columns="2" cellpadding="5" style="margin: 0 auto; margin-top: 40px;">
 			<h:outputText value="Login: " />
-       		<p:inputText id="txLogin" size="30" />
+       		<p:inputText id="txNome" value="#{loginAction.txNome}" size="30" required="true" />
 			<h:outputText value="Senha: " />
-       		<p:password id="txSenha" size="30" />
-		</h:panelGrid>
-		
-		<p:commandButton value="Entrar" style="float: right; margin-top: 20px; margin-right: 50px;"/>
+       		<p:password id="txSenha" value="#{loginAction.txSenha}" size="30" required="true" />
+		</h:panelGrid>		
+		<p:commandButton value="Entrar" style="float: right; margin-top: 20px; margin-right: 50px;" actionListener="#{loginAction.login}"/>		
 	</h:form>		
 </h:body> 
 </html>

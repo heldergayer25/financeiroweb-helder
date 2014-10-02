@@ -2,7 +2,14 @@ package br.com.financeiroweb.dao;
 
 import java.util.ArrayList;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
 import br.com.financeiroweb.pojo.Acesso;
+import br.com.financeiroweb.util.HibernateUtil;
 
 @SuppressWarnings("rawtypes")
 public class AcessoDao extends AbstractDao{
@@ -53,5 +60,29 @@ public class AcessoDao extends AbstractDao{
     public ArrayList findAll(){
         return super.findAll(Acesso.class);
     }    
+    
+    public Acesso validaLogin(Acesso acesso){
+    	SessionFactory factory = HibernateUtil.getSessionFactory();		
+	    Transaction tx;
+	    Session session = factory.openSession();
+	    Acesso access = new Acesso();
+	    
+	    try {	            
+            tx = session.beginTransaction();
+            
+            Query query = session.createQuery("from Acesso a where a.login = :login and a.senha = :senha");
+            query.setParameter("login", acesso.getLogin());
+            query.setParameter("senha", acesso.getSenha());
+            
+            access = (Acesso) query.uniqueResult();
+            
+            tx.commit();
+        } catch (HibernateException e) {
+            System.out.println("Login e Senha não encontrados!" + e.getStackTrace() + e.getMessage());
+        } finally {
+            session.flush();
+        }
+    	return access;
+    }
 	
 }

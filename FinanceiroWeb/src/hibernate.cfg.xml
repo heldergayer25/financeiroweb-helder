@@ -9,5 +9,19 @@
   <property name="hibernate.connection.username">root</property>
   <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
   <property name="hibernate.show_sql">true</property>
+  <mapping class="br.com.financeiroweb.pojo.Acesso"/>
+  <mapping class="br.com.financeiroweb.pojo.Usuario"/>
+  <mapping class="br.com.financeiroweb.pojo.ClienteFornecedor"/>
+  <mapping class="br.com.financeiroweb.pojo.CondicaoDePagamento"/>
+  <mapping class="br.com.financeiroweb.pojo.ContaBancaria"/>
+  <mapping class="br.com.financeiroweb.pojo.ContaContabil"/>
+  <mapping class="br.com.financeiroweb.pojo.Contato"/>
+  <mapping class="br.com.financeiroweb.pojo.Empresa"/>
+  <mapping class="br.com.financeiroweb.pojo.Endereco"/>
+  <mapping class="br.com.financeiroweb.pojo.Funcionario"/>
+  <mapping class="br.com.financeiroweb.pojo.HistoricoMovimento"/>
+  <mapping class="br.com.financeiroweb.pojo.Modulo"/>
+  <mapping class="br.com.financeiroweb.pojo.Movimento"/>
+  <mapping class="br.com.financeiroweb.pojo.PlanoDeContas"/>
  </session-factory>
 </hibernate-configuration>

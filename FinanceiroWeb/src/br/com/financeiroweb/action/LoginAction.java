@@ -8,9 +8,9 @@ import javax.faces.event.ActionEvent;
 
 import org.primefaces.context.RequestContext;
 
-import br.com.financeiroweb.dao.UsuarioDao;
+import br.com.financeiroweb.dao.AcessoDao;
 import br.com.financeiroweb.pojo.Acesso;
-import br.com.financeiroweb.pojo.Usuario;
+import br.com.financeiroweb.util.Criptografia;
 
 @ManagedBean
 @RequestScoped
@@ -40,18 +40,20 @@ public class LoginAction {
         FacesMessage message = null;
         boolean loggedIn = false;
         
-        Usuario usuario = new Usuario();
+        Criptografia criptografia = new Criptografia();
+        String senhaCriptografada = criptografia.md5(txSenha);
+        
         Acesso acesso = new Acesso();
         acesso.setLogin(txNome);
-        acesso.setSenha(txSenha);
-        usuario.setAcesso(acesso);
-        UsuarioDao dao = new UsuarioDao();
-        Usuario user = dao.validaLogin(usuario);
-         
-        if(user.getAcesso().getLogin() != null && user.getAcesso().getLogin().equals("admin") && user.getAcesso().getSenha() != null && user.getAcesso().getSenha().equals("admin")) {
+        acesso.setSenha(senhaCriptografada);
+        
+        AcessoDao acessoDao = new AcessoDao();
+        Acesso resultado = acessoDao.validaLogin(acesso);  
+        
+        if(resultado != null){        	
             loggedIn = true;
-            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bem vindo!", txNome);
-        } else {
+            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bem vindo!", txNome);            
+        }else{
             loggedIn = false;
             message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro ao Logar!", "Login/Senha inválidos!");
         }

@@ -61,7 +61,7 @@ public class AcessoDao extends AbstractDao{
         return super.findAll(Acesso.class);
     }    
     
-    public Acesso validaLogin(Acesso acesso){
+    /*public Acesso validaLogin(Acesso acesso){
     	SessionFactory factory = HibernateUtil.getSessionFactory();		
 	    Transaction tx;
 	    Session session = factory.openSession();
@@ -83,6 +83,35 @@ public class AcessoDao extends AbstractDao{
             session.flush();
         }
     	return access;
+    }*/
+    
+    public boolean validaLogin(Acesso acesso){
+    	SessionFactory factory = HibernateUtil.getSessionFactory();		
+	    Transaction tx;
+	    Session session = factory.openSession();
+	    Acesso access = new Acesso();
+	    boolean valido = false;
+	    
+	    try {	            
+            tx = session.beginTransaction();
+            
+            Query query = session.createQuery("from Acesso a where a.login = :login and a.senha = :senha");
+            query.setParameter("login", acesso.getLogin());
+            query.setParameter("senha", acesso.getSenha());
+            
+            access = (Acesso) query.uniqueResult();
+            if(access != null){
+            	valido = true;
+            }
+            
+            tx.commit();
+        } catch (HibernateException e) {
+            System.out.println("Login e Senha não encontrados!" + e.getStackTrace() + e.getMessage());
+        } finally {
+            session.flush();
+        }
+    	return valido;
     }
+
 	
 }

@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="/estilo.css"/>
+	<title>Login</title>	
+	<style type="text/css">
+	    body {background-color: #eeeeee; font-size: 14px; font-family: 'helvetica'; }
+	    .login { border: 2px solid #D9D9D9; width: 400px; height: 250px; margin: 0 auto; margin-top: 200px;}	
+	    h2 { font-size: 40px; text-align: center; color: #B8B8B8; margin-top: 100px; }    
+    </style> 	
+</h:head> 
+    <h:body>           
+    <h2>Financeiro Web</h2>	
+	<h:form styleClass="login" id="loginForm" >
+	<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+		<p:growl id="msg" showDetail="true" life="3000" />		
+		<h:panelGrid id="loginPanel" columns="2" cellpadding="5" style="margin: 0 auto; margin-top: 40px;">
+			<h:outputText value="Login: " />
+       		<p:inputText id="username" value="#{loginBean.uname}" size="30" required="true" />       		
+			<h:outputText value="Senha: " />
+       		<p:password id="password" value="#{loginBean.password}" size="30" required="true" />       		    
+		</h:panelGrid>		
+		<p:commandButton value="Entrar" style="float: right; margin-top: 20px; margin-right: 50px;" action="#{loginBean.loginProject()}"/>		
+	</h:form>
+    </h:body> 
+</html>

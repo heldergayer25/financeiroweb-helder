@@ -1,60 +1,93 @@
 package br.com.financeiroweb.action;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
-@ManagedBean
+import br.com.financeiroweb.dao.AcessoDao;
+import br.com.financeiroweb.pojo.Acesso;
+import br.com.financeiroweb.util.Criptografia;
+
+/**
+ * ManagedBean responsável pelo Login de acesso do usuário ao sistema
+ * @author Helder
+ *
+ */
+@ManagedBean(name = "loginAction")
 @SessionScoped
 public class LoginAction {
-
-	private String txNome;    
-    private String txSenha;
-    
-    public String getTxNome() {
-		return txNome;
-	}
-    
-	public void setTxNome(String txNome) {
-		this.txNome = txNome;
-	}
 	
-	public String getTxSenha() {
-		return txSenha;
-	}
-	
-	public void setTxSenha(String txSenha) {
-		this.txSenha = txSenha;
+    private String senha;
+    private String mensagens;
+    private String login;
+ 
+    public String getSenha() {
+		return senha;
 	}
 
-//	public String login(ActionEvent event) {
-//        RequestContext context = RequestContext.getCurrentInstance();
-//        FacesMessage message = null;
-//        boolean loggedIn = false;
-//        
-//        Criptografia criptografia = new Criptografia();
-//        String senhaCriptografada = criptografia.md5(txSenha);
-//        
-//        Acesso acesso = new Acesso();
-//        acesso.setLogin(txNome);
-//        acesso.setSenha(senhaCriptografada);
-//        
-//        AcessoDao acessoDao = new AcessoDao();
-//        Acesso resultado = acessoDao.validaLogin(acesso);  
-//        
-//        if(resultado != null){        	
-//            loggedIn = true;
-//            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bem vindo!", txNome);
-//            FacesContext.getCurrentInstance().addMessage(null, message);
-//            context.addCallbackParam("loggedIn", loggedIn);
-//            return "/layout.xhtml?faces-redirect=true";
-//        }else{
-//            loggedIn = false;
-//            message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro ao Logar!", "Login/Senha inválidos!");
-//        }
-//         
-//        FacesContext.getCurrentInstance().addMessage(null, message);
-//        context.addCallbackParam("loggedIn", loggedIn);
-//        return "/index.xhtml?faces-redirect=true";
-//    }
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getMensagens() {
+		return mensagens;
+	}
+
+	public void setMensagens(String mensagens) {
+		this.mensagens = mensagens;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	/**
+	 * Verifica login e senha e efetua o logon do usuário criando uma sessão
+	 * @return
+	 */
+	public String logon() {
+        boolean result = false; 
+        AcessoDao acessoDao = new AcessoDao();
+        Acesso acesso = new Acesso();
+        
+        Criptografia criptografia = new Criptografia();
+        String md5 = criptografia .md5(senha);
+        
+        acesso.setLogin(login);
+        acesso.setSenha(md5);
+                
+        result = acessoDao.validaLogin(acesso);
+        
+        if(result) {            
+            HttpSession session = Util.getSession();
+            session.setAttribute("login", login);
+ 
+            return "home";
+        } else { 
+            FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN,
+                    "Login inválido!",
+                    "Por favor tente novamente!")); 
+            
+            return "login";
+        }
+    }
+ 
+	/**
+	 * Encerra a sessão
+	 * @return
+	 */
+    public String logout() {
+      HttpSession session = Util.getSession();
+      session.invalidate();
+      return "login";
+   }
 	
 }

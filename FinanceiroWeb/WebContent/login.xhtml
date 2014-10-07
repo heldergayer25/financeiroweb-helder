@@ -22,11 +22,11 @@
 		<p:growl id="msg" showDetail="true" life="3000" />		
 		<h:panelGrid id="loginPanel" columns="2" cellpadding="5" style="margin: 0 auto; margin-top: 40px;">
 			<h:outputText value="Login: " />
-       		<p:inputText id="username" value="#{loginBean.uname}" size="30" required="true" />       		
+       		<p:inputText id="login" value="#{loginAction.login}" size="30" required="true" />       		
 			<h:outputText value="Senha: " />
-       		<p:password id="password" value="#{loginBean.password}" size="30" required="true" />       		    
+       		<p:password id="senha" value="#{loginAction.senha}" size="30" required="true" />       		    
 		</h:panelGrid>		
-		<p:commandButton value="Entrar" style="float: right; margin-top: 20px; margin-right: 50px;" action="#{loginBean.loginProject()}"/>		
+		<p:commandButton value="Entrar" style="float: right; margin-top: 20px; margin-right: 50px;" action="#{loginAction.logon()}"/>		
 	</h:form>
     </h:body> 
 </html>

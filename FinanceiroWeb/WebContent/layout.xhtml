@@ -10,19 +10,18 @@
     <title>Bem vindo ao Financeiro Web!</title>
     <style type="text/css">
 	    body { background-color: #eeeeee; font-size: 12px }
-	    div.logout { float: right; margin-right: 10px; }
-	    
+	    div.logout { float: right; margin-right: 10px; }	    
     </style> 
     </h:head>
     <h:body>    
         <div align="center">
-            <p:layout style="min-width:1020px;max-width:1020px;min-height:600px">  
+            <p:layout style="max-width:1024px; min-height:800px" fullPage="true">  
                 <p:layoutUnit position="north" size="100">
                 	<ui:insert name="cabecalho">
                 		<!-- <h:graphicImage url="/tema/imagens/topo.jpg" /> -->
                 		<div class="logout">                	
                 			<h:form>
-                				<p>Bem vindo, #{loginAction.login}</p>
+                				<p>Bem vindo, #{loginAction.usuario.nome}</p>
 						    	<p:commandLink action="#{loginAction.logout()}" value="Sair"  ajax="false"></p:commandLink>
                 			</h:form>	       					        							
                 		</div>                		
@@ -33,12 +32,13 @@
                         <h:form>
                             <p:growl autoUpdate="true"/> 
 						    <p:panelMenu style="width:220x">
-						        <p:submenu label="Ajax Menuitems">
-						            <p:menuitem value="Save" icon="ui-icon-disk" />
-						            <p:menuitem value="Update" icon="ui-icon-arrowrefresh-1-w" />
+						        <p:submenu label="Usuários">
+						            <p:menuitem value="Cadastrar" outcome="/empresa/cadastrar.xhtml" icon="ui-icon-disk" />
+						            <p:menuitem value="Pesquisar" icon="ui-icon-search" />
 						        </p:submenu>
-						        <p:submenu label="Non-Ajax Menuitem">
-						            <p:menuitem value="Delete" ajax="false" icon="ui-icon-close"/>
+						        <p:submenu label="Empresas">
+						            <p:menuitem value="Cadastrar" icon="ui-icon-disk" />
+						            <p:menuitem value="Pesquisar" icon="ui-icon-arrowrefresh-1-w" />
 						        </p:submenu>
 						        <p:separator />
 						        <p:submenu label="Navigations" >

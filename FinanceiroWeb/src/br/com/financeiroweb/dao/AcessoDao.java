@@ -71,12 +71,12 @@ public class AcessoDao extends AbstractDao{
      * @param acesso
      * @return
      */
-    public boolean validaLogin(Acesso acesso){
+    public Acesso validaLogin(Acesso acesso){
     	SessionFactory factory = HibernateUtil.getSessionFactory();		
 	    Transaction tx;
 	    Session session = factory.openSession();
 	    Acesso access = new Acesso();
-	    boolean valido = false;
+	    //boolean valido = false;
 	    
 	    try {	            
             tx = session.beginTransaction();
@@ -85,10 +85,7 @@ public class AcessoDao extends AbstractDao{
             query.setParameter("login", acesso.getLogin());
             query.setParameter("senha", acesso.getSenha());
             
-            access = (Acesso) query.uniqueResult();
-            if(access != null){
-            	valido = true;
-            }
+            access = (Acesso) query.uniqueResult();            
             
             tx.commit();
         } catch (HibernateException e) {
@@ -96,7 +93,7 @@ public class AcessoDao extends AbstractDao{
         } finally {
             session.flush();
         }
-    	return valido;
+    	return access;
     }
 
 	

@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Cadastro de Empresas</title>	
+	</h:head>
+<h:body>
+	<ui:composition template="/layout.xhtml">
+		<ui:define name="conteudo">
+		<h2>Cadastro de Empresas</h2>
+			<h:form id="formCadastrarEmpresa">
+			<p:growl id="growl" sticky="true" showDetail="true"/>
+				<h:panelGrid id="cadastrarEmpresaPanel" columns="4" cellpadding="5" cellspacing="10" style="margin-top: 20px;">
+					<p:outputLabel value="Razão Social: " />				
+					<p:inputText id="razao" size="30" value="#{empresaAction.empresa.razao}" required="true" />
+					<p:outputLabel value="Nome Fantasia: " />				
+					<p:inputText id="fantasia" size="30" value="#{empresaAction.empresa.fantasia}" required="true" />
+					<p:outputLabel value="CNPJ: " />				
+					<p:inputText id="cnpj" size="30" value="#{empresaAction.empresa.cnpj}" required="true" />
+					<p:outputLabel value="CPF: " />				
+					<p:inputText id="cpf" size="30" value="#{empresaAction.empresa.cpf}" required="true" />
+					<p:outputLabel value="Inscrição Estadual: " />				
+					<p:inputText id="ie" size="30" value="#{empresaAction.empresa.ie}" required="true" />
+					<p:outputLabel value="Inscrição Municipal: " />				
+					<p:inputText id="im" size="30" value="#{empresaAction.empresa.im}" required="true" />
+					
+					<p:outputLabel value="Rua: " />				
+					<p:inputText id="rua" size="30" value="#{empresaAction.endereco.rua}" required="true" />
+					<p:outputLabel value="Número: " />				
+					<p:inputText id="numero" size="30" value="#{empresaAction.endereco.numero}" required="true" />
+					<p:outputLabel value="CEP: " />				
+					<p:inputText id="cep" size="30" value="#{empresaAction.endereco.cep}" required="true" />
+					<p:outputLabel value="Bairro: " />				
+					<p:inputText id="bairro" size="30" value="#{empresaAction.endereco.bairro}" required="true" />
+					<p:outputLabel value="Município: " />				
+					<p:inputText id="municipio" size="30" value="#{empresaAction.endereco.municipio}" required="true" />
+					<p:outputLabel value="UF: " />				
+					<p:inputText id="estado" size="30" value="#{empresaAction.endereco.estado}" required="true" />
+					<p:outputLabel value="País: " />				
+					<p:inputText id="pais" size="30" value="#{empresaAction.endereco.pais}" required="true" />
+					<p:outputLabel value="Outro: " />				
+					<p:inputText id="outro" size="30" value="#{empresaAction.endereco.outro}" required="true" />
+					
+					<p:outputLabel value="Telefone: " />				
+					<p:inputText id="telefone" size="30" value="#{empresaAction.contato.telefone}" required="true" />
+					<p:outputLabel value="Celular: " />				
+					<p:inputText id="celular" size="30" value="#{empresaAction.contato.celular}" required="true" />
+					<p:outputLabel value="E-mail: " />				
+					<p:inputText id="email" size="30" value="#{empresaAction.contato.email}" required="true" />					
+				</h:panelGrid>
+				<p:commandButton value="Salvar" style="float: center; margin-top: 40px;" action="#{empresaAction.salvarEmpresa()}"/>
+			</h:form>
+		</ui:define>
+	</ui:composition>      
+</h:body>
+</html>

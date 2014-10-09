@@ -7,7 +7,9 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import br.com.financeiroweb.dao.AcessoDao;
+import br.com.financeiroweb.dao.UsuarioDao;
 import br.com.financeiroweb.pojo.Acesso;
+import br.com.financeiroweb.pojo.Usuario;
 import br.com.financeiroweb.util.Criptografia;
 
 /**
@@ -22,8 +24,17 @@ public class LoginAction {
     private String senha;
     private String mensagens;
     private String login;
- 
-    public String getSenha() {
+    private Usuario usuario;
+         
+    public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getSenha() {
 		return senha;
 	}
 
@@ -51,22 +62,23 @@ public class LoginAction {
 	 * Verifica login e senha e efetua o logon do usuário criando uma sessão
 	 * @return
 	 */
-	public String logon() {
-        boolean result = false; 
+	public String logon() {        
         AcessoDao acessoDao = new AcessoDao();
         Acesso acesso = new Acesso();
-        
+                
         Criptografia criptografia = new Criptografia();
         String md5 = criptografia .md5(senha);
         
         acesso.setLogin(login);
         acesso.setSenha(md5);
                 
-        result = acessoDao.validaLogin(acesso);
+        Acesso access = acessoDao.validaLogin(acesso);
         
-        if(result) {            
+        if(access != null) {     
+        	UsuarioDao usuarioDao = new UsuarioDao();
+        	usuario = usuarioDao.buscaUsuario(access);
             HttpSession session = Util.getSession();
-            session.setAttribute("login", login);
+            session.setAttribute("usuario", usuario);            
  
             return "home";
         } else { 

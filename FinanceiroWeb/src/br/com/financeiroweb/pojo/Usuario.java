@@ -24,10 +24,23 @@ public class Usuario implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "acesso_id", nullable = false)
 	private Acesso acesso;
+
+	@Column(name = "nome", nullable = false, length = 100)
 	private String nome;
+	
+	@Column(name = "cpf", nullable = false, length = 11)
 	private String cpf;
+	
+	@Column(name = "email", nullable = false, length = 45)
 	private String email;
 
 	public Usuario() {
@@ -39,10 +52,7 @@ public class Usuario implements java.io.Serializable {
 		this.cpf = cpf;
 		this.email = email;
 	}
-
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
+	
 	public Integer getId() {
 		return this.id;
 	}
@@ -50,9 +60,7 @@ public class Usuario implements java.io.Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "acesso_id", nullable = false)
+	
 	public Acesso getAcesso() {
 		return this.acesso;
 	}
@@ -60,8 +68,7 @@ public class Usuario implements java.io.Serializable {
 	public void setAcesso(Acesso acesso) {
 		this.acesso = acesso;
 	}
-
-	@Column(name = "nome", nullable = false, length = 100)
+	
 	public String getNome() {
 		return this.nome;
 	}
@@ -69,8 +76,7 @@ public class Usuario implements java.io.Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	@Column(name = "cpf", nullable = false, length = 11)
+	
 	public String getCpf() {
 		return this.cpf;
 	}
@@ -78,8 +84,7 @@ public class Usuario implements java.io.Serializable {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
-	@Column(name = "email", nullable = false, length = 45)
+	
 	public String getEmail() {
 		return this.email;
 	}

@@ -27,7 +27,7 @@ public class Util{
  
       public static String getUserName(){
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        return  session.getAttribute("login").toString();
+        return  session.getAttribute("usuario").toString();
       }
        
       public static String getUserId(){
